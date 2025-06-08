@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block title %}Make a Prediction{% endblock %}
+
+{% block content %}
+<section id="prediction" class="prediction section">
+  <div class="container">
+    <div class="section-title">
+      <h2>Make a Prediction</h2>
+      <p>Upload an endoscopic image and get an instant prediction.</p>
+
+      <!-- Informational Container -->
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-8">
+        <div class="info-box p-4 shadow-sm rounded">
+          <h4>How the Model Works</h4>
+          <p>
+            Our model leverages advanced machine learning techniques, including convolutional neural networks (CNNs), 
+            to analyze endoscopic images. By identifying subtle patterns and features that may not be visible to the naked eye, 
+            the model classifies images as either "Cancerous" or "Non-Cancerous." This system has been trained on thousands of labeled images, 
+            ensuring high accuracy and reliability within its scope.
+          </p>
+          <br>
+          <h5 class="text-danger">Disclaimer</h5>
+          <p class="text-muted">
+            The predictions provided by this tool are intended for informational purposes only and should not 
+            replace professional medical advice. Always consult a qualified healthcare provider for an official diagnosis 
+            and further evaluation.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container" id="predict">
+      <h2>Make a Prediction</h2>
+      <form action="/predict" method="POST" enctype="multipart/form-data">
+        <div class="form-group mb-4">
+          <label for="modelSelect">Select Model</label>
+          <select name="model" id="modelSelect" class="form-control" required>
+            <option value="" disabled selected>Select a model</option>
+            {% for model in models %}
+            <option value="{{ model }}">{{ model }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group mb-4">
+          <label for="imageUpload">Upload an Image</label>
+          <input type="file" name="image" id="imageUpload" class="form-control" accept="image/*" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Predict</button>
+      </form>
+    
+      {% if prediction_result %}
+      <div class="row justify-content-center mt-5">
+        <div class="col-lg-8">
+          <div class="card shadow-lg">
+            <div class="card-header text-white" style="background: linear-gradient(90deg, #ff7e5f, #feb47b);">
+              <h4 class="mb-0 text-center">Prediction Results</h4>
+            </div>
+            <div class="card-body text-center">
+              <!-- Uploaded Image -->
+              <div class="mb-3">
+                <img src="{{ url_for('static', filename='uploads/{{ image }}') }}" 
+                     alt="Uploaded Image" 
+                     class="img-fluid rounded" 
+                     style="max-height: 300px;">
+              </div>
+              <!-- Prediction Details -->
+              <p>
+                <i class="bi bi-file-earmark-text text-primary me-2"></i>
+                <strong>Prediction:</strong> {{ prediction_result.label }}
+              </p>
+              <p>
+                <i class="bi bi-bar-chart-line-fill text-info me-2"></i>
+                <strong>Confidence:</strong> {{ prediction_result.confidence }}%
+              </p>
+            </div>
+            <div class="card-footer text-muted text-center">
+              <p>Want to try again? <a href="/predict#predict" class="btn btn-outline-primary btn-sm">Upload Another Image</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      
+
+    </div>
+</section>
+{% endblock %}

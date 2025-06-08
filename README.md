@@ -69,3 +69,4 @@ The server will start on [http://127.0.0.1:8000](http://127.0.0.1:8000).
 Live utility of the service will be through Azure deployment. Model and app will be dockerised and will be accessed live through the deployed link online.
 
 
+[Link to description of system](https://drive.google.com/file/d/1iSs1yvhzHwqkh1rrhP4xcEEblIF_3cdu/view?usp=sharing)

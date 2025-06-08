@@ -58,3 +58,14 @@ The server will start on [http://127.0.0.1:8000](http://127.0.0.1:8000).
     - Upload a zipped folder with labeled images (cancerous, non-cancerous) to train a new model.
 - **Model Listing**: `/list-models/`
     - Fetch all available models for prediction.
+
+
+## Model Architecture
+![Model Layers](./images/model_layers.png)
+
+
+
+## Deployment
+Live utility of the service will be through Azure deployment. Model and app will be dockerised and will be accessed live through the deployed link online.
+
+

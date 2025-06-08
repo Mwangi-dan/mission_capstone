@@ -1,1 +1,1 @@
-# mission_capstone
+# Early Detection of Gastric Cancer using Deep Learning
